@@ -6,6 +6,13 @@ string ltrim(const string &);
 string rtrim(const string &);
 vector<string> split(const string &);
 
+// From https://www.hackerrank.com/challenges/maximum-palindromes/forum
+
+const int MOD = 1000000007;
+long long int I[101010];
+long long int F[101010];
+int chars[26][101010];
+
 /*
  * Complete the 'initialize' function below.
  *

@@ -13,6 +13,19 @@ long long int I[101010];
 long long int F[101010];
 int chars[26][101010];
 
+long long int fexp(long long int a, long long int b)
+{
+    if (b ==0)
+        return 1LL;
+    
+    long long int res = fexp(a, b/2);
+    res = (res * res) % MOD;
+    if (b % 2 == 1)
+        res = (res * a) % MOD;
+
+    return res;
+}
+
 /*
  * Complete the 'initialize' function below.
  *

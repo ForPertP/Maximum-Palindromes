@@ -26,6 +26,12 @@ long long int fexp(long long int a, long long int b)
     return res;
 }
 
+long long int inv(long long int a)
+{
+    return 1.0L;
+}
+
+
 /*
  * Complete the 'initialize' function below.
  *

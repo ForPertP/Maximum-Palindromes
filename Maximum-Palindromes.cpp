@@ -28,9 +28,29 @@ long long int fexp(long long int a, long long int b)
 
 long long int inv(long long int a)
 {
-    return 1.0L;
+    return fexp(a, MOD-2);
 }
 
+void initialize(string s)
+{
+    F[0] = 1;
+    for (int i = 1; i <= 100000; ++i)
+        F[i] = (F[i-1] * i) % MOD;
+    
+    for (int i = 0; i <= 100000; ++i)
+        I[i] = inv(F[i]);
+        
+    for(int i = 1; i <= s.length(); ++i)
+    {
+        int p = i;
+        int c = s[p-1]-'a';
+        while (p <= 100000)
+        {
+            chars[c][p] += 1;
+            p += p & (-p);
+        }
+    }
+}
 
 /*
  * Complete the 'initialize' function below.

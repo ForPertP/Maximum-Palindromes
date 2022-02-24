@@ -52,6 +52,20 @@ void initialize(string s)
     }
 }
 
+int query(int p, int c)
+{
+    int sum = 0;
+    while (p > 0)
+    {
+        sum += chars[c][p];
+        p -= p & (-p);
+    }
+    
+    return sum;
+}
+
+
+
 /*
  * Complete the 'initialize' function below.
  *

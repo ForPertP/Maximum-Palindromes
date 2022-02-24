@@ -64,31 +64,35 @@ int query(int p, int c)
     return sum;
 }
 
-
-
-/*
- * Complete the 'initialize' function below.
- *
- * The function accepts STRING s as parameter.
- */
-
-void initialize(string s) {
-    // This function is called once before all queries.
-
+int query(int l,int r, int c)
+{
+    return query(r, c) - query(l-1, c);
 }
 
-/*
- * Complete the 'answerQuery' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER l
- *  2. INTEGER r
- */
+long long int answerQuery(int l, int r)
+{
+    int c_odd = 0;
+    int c_even = 0;
+    long long int res = 1;
 
-int answerQuery(int l, int r) {
-    // Return the answer for this query modulo 1000000007.
-
+    for (int c = 0; c < 26; ++c)
+    {
+        int q_range = query(l, r, c);
+        if (q_range%2 == 1)
+            c_odd++;
+        
+        res = (res * I[q_range/2]) % MOD;
+        c_even += q_range / 2;
+    }
+    
+    if (c_even == 0 && c_odd == 0)
+        return 0LL;
+    
+    res = (res * F[c_even]) % MOD;
+    if (c_odd > 0)
+        res = (res * c_odd) % MOD;
+    
+    return res;
 }
 
 int main()
@@ -105,18 +109,17 @@ int main()
 
     int q = stoi(ltrim(rtrim(q_temp)));
 
-    for (int q_itr = 0; q_itr < q; q_itr++) {
+    for (int q_itr = 0; q_itr < q; q_itr++)
+    {
         string first_multiple_input_temp;
         getline(cin, first_multiple_input_temp);
 
         vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
         int l = stoi(first_multiple_input[0]);
-
         int r = stoi(first_multiple_input[1]);
 
         int result = answerQuery(l, r);
-
         fout << result << "\n";
     }
 
@@ -163,4 +166,3 @@ vector<string> split(const string &str) {
 
     return tokens;
 }
-

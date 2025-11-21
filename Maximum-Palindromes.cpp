@@ -128,14 +128,14 @@ int main()
     return 0;
 }
 
-string ltrim(const string &str) {
+
+
+string ltrim(const string &str)
+{
     string s(str);
-
     s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+        s.begin(), find_if(s.begin(), s.end(), [](unsigned char ch) { return !isspace(ch); })
     );
-
     return s;
 }
 

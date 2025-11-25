@@ -6,6 +6,23 @@ string ltrim(const string &);
 string rtrim(const string &);
 vector<string> split(const string &);
 
+static const int MOD = 1000000007;
+static const int MAXN = 200000;
+
+long long fact[MAXN+1], invfact[MAXN+1];
+int prefixCnt[26][MAXN+1];
+string S;
+
+long long modpow(long long a,long long e){
+    long long r=1;
+    while(e){
+        if(e&1) r=r*a%MOD;
+        a=a*a%MOD;
+        e>>=1;
+    }
+    return r;
+}
+
 
 int main()
 {

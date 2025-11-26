@@ -23,6 +23,27 @@ long long modpow(long long a,long long e){
     return r;
 }
 
+/*
+ * Complete the 'initialize' function below.
+ *
+ * The function accepts STRING s as parameter.
+ */
+
+void initialize(string s) {
+    S = s;
+    int n = s.size();
+    fact[0] = 1;
+    for(int i=1;i<=MAXN;i++) fact[i] = fact[i-1]*i % MOD;
+    invfact[MAXN] = modinv(fact[MAXN]);
+    for(int i=MAXN-1;i>=0;i--) invfact[i] = invfact[i+1]*(i+1)%MOD;
+
+    for(int c=0;c<26;c++) prefixCnt[c][0] = 0;
+    for(int i=0;i<n;i++){
+        for(int c=0;c<26;c++) prefixCnt[c][i+1] = prefixCnt[c][i];
+        prefixCnt[s[i]-'a'][i+1]++;
+    }
+}
+
 
 int main()
 {

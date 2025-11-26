@@ -23,13 +23,6 @@ long long modpow(long long a, long long e) {
     return r;
 }
 
-
-/*
- * Complete the 'initialize' function below.
- *
- * The function accepts STRING s as parameter.
- */
-
 void initialize(string s) {
     S = s;
     int n = s.size();

@@ -33,4 +33,21 @@ class Result {
         return modpow(a, MOD - 2);
     }
 
+    public static int answerQuery(int l, int r) {
+        long left_pairs = 0;
+        long odd = 0;
+        long denom = 1;
+
+        for (int c = 0; c < 26; c++) {
+            int cnt = prefixCnt[c][r] - prefixCnt[c][l - 1];
+            left_pairs += cnt / 2;
+            if ((cnt & 1) == 1) odd++;
+            denom = (denom * fact[cnt / 2]) % MOD;
+        }
+
+        long res = fact[(int)left_pairs] * modinv(denom) % MOD;
+        if (odd > 0) res = (res * odd) % MOD;
+
+        return (int)res;
+    }    
 }

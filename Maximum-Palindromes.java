@@ -33,6 +33,45 @@ class Result {
         return modpow(a, MOD - 2);
     }
 
+
+    /*
+     * Complete the 'initialize' function below.
+     *
+     * The function accepts STRING s as parameter.
+     */
+
+    public static void initialize(String s) {
+        S = s;
+        int n = s.length();
+
+        fact[0] = 1;
+        for (int i = 1; i <= MAXN; i++)
+            fact[i] = fact[i - 1] * i % MOD;
+
+        invfact[MAXN] = modinv(fact[MAXN]);
+        for (int i = MAXN - 1; i >= 0; i--)
+            invfact[i] = invfact[i + 1] * (i + 1) % MOD;
+
+        for (int c = 0; c < 26; c++)
+            prefixCnt[c][0] = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int c = 0; c < 26; c++)
+                prefixCnt[c][i + 1] = prefixCnt[c][i];
+            prefixCnt[s.charAt(i) - 'a'][i + 1]++;
+        }
+    }
+
+
+    /*
+     * Complete the 'answerQuery' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER l
+     *  2. INTEGER r
+     */
+
     public static int answerQuery(int l, int r) {
         long left_pairs = 0;
         long odd = 0;
@@ -49,7 +88,7 @@ class Result {
         if (odd > 0) res = (res * odd) % MOD;
 
         return (int)res;
-    }    
+    }
 }
 
 
@@ -85,4 +124,3 @@ public class Solution {
         bufferedWriter.close();
     }
 }
-
